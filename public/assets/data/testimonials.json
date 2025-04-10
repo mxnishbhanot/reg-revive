@@ -1,0 +1,23 @@
+[
+    {
+      "rating": 5,
+      "text": "My gaming PC was overheating constantly. After RigRevive's cleaning service, it runs cooler and quieter than ever. Highly recommended!",
+      "name": "Rahul Singh",
+      "location": "Mohali",
+      "avatar": "/assets/images/rahul.jpg"
+    },
+    {
+      "rating": 5,
+      "text": "Professional service from start to finish. The pickup and delivery were on time, and my workstation has never been cleaner. Worth every penny!",
+      "name": "Priya Sharma",
+      "location": "Kharar",
+      "avatar": "/assets/images/priya.jpg"
+    },
+    {
+      "rating": 5,
+      "text": "I was amazed at how much dust they removed from my PC. The cable management add-on was a game-changer too. My setup looks brand new!",
+      "name": "Amit Patel",
+      "location": "Rupnagar",
+      "avatar": "/assets/images/amit.jpg"
+    }
+  ]

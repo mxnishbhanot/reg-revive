@@ -1,0 +1,21 @@
+[
+    {
+      "title": "Standard Clean",
+      "description": "Complete dust removal, component cleaning, and thermal paste replacement for optimal performance.",
+      "features": ["Dust Removal", "Component Cleaning", "Thermal Paste"],
+      "icon": "standard"
+    },
+    {
+      "title": "Urgent Clean",
+      "description": "Priority service with same-day pickup and next-day return for urgent cleaning needs.",
+      "features": ["Same-Day Pickup", "Next-Day Return", "Priority Service"],
+      "icon": "urgent",
+      "featured": true
+    },
+    {
+      "title": "Add-ons",
+      "description": "Enhance your cleaning with additional services like cable management and RGB setup.",
+      "features": ["Cable Management", "RGB Setup", "Performance Tuning"],
+      "icon": "addons"
+    }
+  ]

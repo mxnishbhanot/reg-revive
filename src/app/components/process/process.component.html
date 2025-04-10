@@ -1,0 +1,11 @@
+<section class="process">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-subtitle">Our simple pickup-clean-return process</p>
+      </div>
+      <div class="process__steps">
+        <app-step *ngFor="let step of steps" [step]="step"></app-step>
+      </div>
+    </div>
+  </section>

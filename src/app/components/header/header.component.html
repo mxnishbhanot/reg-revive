@@ -1,0 +1,24 @@
+<header class="header">
+    <div class="container">
+      <div class="header__content">
+        <div class="logo">
+          <h1>RigRevive</h1>
+        </div>
+        <nav class="nav" [class.nav--open]="menuOpen">
+          <ul class="nav__list">
+            <li class="nav__item"><a href="#services" class="nav__link">Services</a></li>
+            <li class="nav__item"><a href="#areas" class="nav__link">Service Areas</a></li>
+            <li class="nav__item"><a href="#process" class="nav__link">How It Works</a></li>
+            <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
+          </ul>
+        </nav>
+        <button class="btn btn--primary header__cta">Book Now</button>
+        <button class="menu-toggle" [class.menu-toggle--open]="menuOpen" 
+                (click)="toggleMenu()" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>

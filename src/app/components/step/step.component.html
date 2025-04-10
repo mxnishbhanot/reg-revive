@@ -1,7 +1,7 @@
 <div class="step">
-    <div class="step__number">{{ step.number }}</div>
-    <div class="step__content">
-      <h3 class="step__title">{{ step.title }}</h3>
-      <p class="step__description">{{ step.description }}</p>
-    </div>
-  </div>
+    <img class="step__image" [src]="step.image">
+    <p class="step__number">{{ step.number }}</p>
+    <h3 class="step__title">{{ step.title }}</h3>
+    <p class="step__description">{{ step.description }}</p>
+
+</div>

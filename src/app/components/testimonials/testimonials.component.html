@@ -1,12 +1,11 @@
 <section id="testimonials" class="testimonials">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">What Our Customers Say</h2>
-        <p class="section-subtitle">Hear from satisfied customers about our PC cleaning services</p>
-      </div>
-      <div class="testimonials__grid">
-        <app-testimonial-card *ngFor="let testimonial of testimonials" 
-                            [testimonial]="testimonial"></app-testimonial-card>
-      </div>
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">What Our Customers Say</h2>
+      <p class="section-subtitle">Hear from satisfied customers about our PC cleaning services</p>
     </div>
-  </section>
+    <div class="testimonials__grid">
+      <app-testimonial-card *ngFor="let testimonial of testimonials" [testimonial]="testimonial"></app-testimonial-card>
+    </div>
+  </div>
+</section>

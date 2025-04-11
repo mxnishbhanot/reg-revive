@@ -1,16 +1,17 @@
 <section class="areas">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Service Areas</h2>
-        <p class="section-subtitle">We provide pickup and delivery services in these locations</p>
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Service Areas</h2>
+      <p class="section-subtitle">We provide pickup and delivery services in these locations</p>
+    </div>
+    <div class="areas__map">
+      <div class="areas__list">
+        <app-area-card *ngFor="let area of areas" [area]="area"></app-area-card>
       </div>
-      <div class="areas__map">
-        <div class="areas__list">
-          <app-area-card *ngFor="let area of areas" [area]="area"></app-area-card>
-        </div>
-        <div class="areas__image">
-          <img src="assets/images/service-areas-map.png" alt="Service Areas Map">
-        </div>
+      <div class="areas__image">
+        <!-- <img src="assets/images/service-areas-map.png" alt="Service Areas Map"> -->
+        <div id="map" style="height: 400px; width: 100%; border-radius: 0.5rem;"></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>

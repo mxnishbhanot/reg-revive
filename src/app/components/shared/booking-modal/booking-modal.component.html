@@ -1,0 +1,182 @@
+<div class="modal-overlay" *ngIf="show" (click)="close.emit()">
+    <div class="modal-blur"></div>
+  </div>
+  
+  <div class="modal" *ngIf="show" [class.modal--success]="formSubmitted">
+    <div class="modal__content" (click)="$event.stopPropagation()">
+      <div class="modal__header">
+        <h2>Book Your <span>Rig Service</span></h2>
+        <button class="modal__close" (click)="close.emit()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+  
+      <div class="modal__body" *ngIf="!formSubmitted">
+        <form (ngSubmit)="submitBooking()" #form="ngForm" novalidate>
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <div class="input-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              <input 
+                type="text" 
+                id="fullName"
+                placeholder="Enter your name" 
+                name="fullName" 
+                required 
+                [(ngModel)]="bookingData.fullName"
+                #fullName="ngModel"
+                [class.is-invalid]="fullName.invalid && (fullName.dirty || fullName.touched)"
+              />
+            </div>
+            <div class="invalid-feedback" *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)">
+              Please provide your full name
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <div class="input-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <input 
+                type="email" 
+                id="email"
+                placeholder="email@example.com" 
+                name="email" 
+                required 
+                [(ngModel)]="bookingData.email"
+                #email="ngModel"
+                [class.is-invalid]="email.invalid && (email.dirty || email.touched)"
+              />
+            </div>
+            <div class="invalid-feedback" *ngIf="email.invalid && (email.dirty || email.touched)">
+              Please provide a valid email address
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <div class="input-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              <input 
+                type="tel" 
+                id="phone"
+                placeholder="(123) 456-7890" 
+                name="phone" 
+                required 
+                [(ngModel)]="bookingData.phone"
+                #phone="ngModel"
+                [class.is-invalid]="phone.invalid && (phone.dirty || phone.touched)"
+              />
+            </div>
+            <div class="invalid-feedback" *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+              Please provide a valid phone number
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label for="serviceType">Service Type</label>
+            <div class="select-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+              </svg>
+              <select 
+                id="serviceType"
+                name="serviceType" 
+                required 
+                [(ngModel)]="bookingData.serviceType"
+                #serviceType="ngModel"
+                [class.is-invalid]="serviceType.invalid && (serviceType.dirty || serviceType.touched)"
+              >
+                <option value="" disabled selected>Select a service</option>
+                <option value="basic">Basic Refresh</option>
+                <option value="standard">Deep Dive</option>
+                <option value="pro">Ultimate ProCare</option>
+              </select>
+            </div>
+            <div class="invalid-feedback" *ngIf="serviceType.invalid && (serviceType.dirty || serviceType.touched)">
+              Please select a service type
+            </div>
+          </div>
+          
+          <!-- Will add in Phase 2 -->
+          <!-- <div class="form-row">
+            <div class="form-group">
+              <label for="date">Preferred Date</label>
+              <div class="input-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <input 
+                  type="date" 
+                  id="date"
+                  name="date" 
+                  required 
+                  [(ngModel)]="bookingData.date"
+                  #date="ngModel"
+                  [class.is-invalid]="date.invalid && (date.dirty || date.touched)"
+                />
+              </div>
+              <div class="invalid-feedback" *ngIf="date.invalid && (date.dirty || date.touched)">
+                Please select a date
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label for="time">Preferred Time</label>
+              <div class="input-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <input 
+                  type="time" 
+                  id="time"
+                  name="time" 
+                  required 
+                  [(ngModel)]="bookingData.time"
+                  #time="ngModel"
+                  [class.is-invalid]="time.invalid && (time.dirty || time.touched)"
+                />
+              </div>
+              <div class="invalid-feedback" *ngIf="time.invalid && (time.dirty || time.touched)">
+                Please select a time
+              </div>
+            </div>
+          </div> -->
+  
+          <button type="submit" class="btn btn-primary" [disabled]="!validateModal()">
+            <span>Book Appointment</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </form>
+      </div>
+  
+      <div class="success-message" *ngIf="formSubmitted">
+        <div class="success-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+        </div>
+        <h3>Booking Confirmed!</h3>
+        <p>Your service has been scheduled. You'll receive a confirmation email shortly.</p>
+      </div>
+    </div>
+  </div>

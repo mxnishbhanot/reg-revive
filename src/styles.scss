@@ -1,16 +1,19 @@
 @use 'sass:color';
-
+@import 'leaflet/dist/leaflet.css';
 // Variables
-$primary-color: #2563eb;
-$secondary-color: #1e40af;
-$accent-color: #3b82f6;
-$dark-color: #1e293b;
-$light-color: #f8fafc;
-$gray-color: #64748b;
-$light-gray-color: #e2e8f0;
-$success-color: #10b981;
-$warning-color: #f59e0b;
-$danger-color: #ef4444;
+$primary-color: #0ea5e9; // Techy Sky Blue — for buttons, links, primary accents
+$secondary-color: #1e293b; // Deep Cool Gray — for headers, navbars, contrast sections
+$accent-color: #22d3ee; // Neon Cyan — for glowing touches, callouts, highlights
+
+$dark-color: #0f172a; // Dark Navy — elegant, futuristic base background
+$light-color: #f1f5f9; // Ice Gray — modern, clean background
+$gray-color: #94a3b8; // Mid Gray — for icons, labels, secondary text
+$light-gray-color: #cbd5e1; // Light Cool Gray — for card borders, inputs, surfaces
+
+$success-color: #34d399; // Mint Green — performance success, optimization done
+$warning-color: #fbbf24; // Clean Yellow — thermal warning, cleaning required
+$danger-color: #f87171; // Soft Red — overheating, BIOS issues, alerts
+
 
 // Breakpoints
 $breakpoint-sm: 640px;
@@ -25,6 +28,10 @@ $breakpoint-xl: 1280px;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+:root {
+  scroll-padding-top: 100px;
 }
 
 html {
@@ -184,7 +191,7 @@ p {
   top: 0;
   background-color: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  z-index: 100;
+  z-index: 1200;
   padding: 1rem 0;
 
   &__content {
@@ -371,9 +378,9 @@ p {
 
 .service-card {
   background-color: white;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   padding: 2rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   display: flex;
@@ -381,7 +388,7 @@ p {
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
   }
 
   &--featured {
@@ -397,7 +404,7 @@ p {
     padding: 0.25rem 1rem;
     border-radius: 1rem;
     font-size: 0.875rem;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   &__icon {
@@ -410,21 +417,27 @@ p {
     border-radius: 50%;
     margin-bottom: 1.5rem;
     color: $primary-color;
-
-    svg {
-      width: 30px;
-      height: 30px;
-    }
+    font-size: 2rem;
   }
 
   &__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+
+  &__price {
     font-size: 1.25rem;
-    margin-bottom: 1rem;
+    font-weight: 700;
+    color: $primary-color;
+    margin-bottom: 1.25rem;
   }
 
   &__description {
     color: $gray-color;
-    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
   }
 
   &__features {
@@ -443,11 +456,34 @@ p {
     }
   }
 
-  &__cta {
-    margin-top: auto;
-    width: 100%;
+  .btn {
+    padding: 0.75rem 1rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease;
+
+    &--primary {
+      background-color: $primary-color;
+      color: white;
+      border: none;
+
+      &:hover {
+        background-color: color.scale($primary-color, $lightness: -10.32%);
+      }
+    }
+
+    &--outline {
+      background-color: transparent;
+      border: 2px solid $primary-color;
+      color: $primary-color;
+
+      &:hover {
+        background-color: rgba($primary-color, 0.05);
+      }
+    }
   }
 }
+
 
 // Areas section
 .areas {
@@ -564,6 +600,15 @@ p {
 
 
   &__number {
+    width: 2.25rem;
+    height: 2.25rem;
+    min-width: 2.25rem;
+    background-color: white;
+    border: 2px solid $primary-color;
+    color: $primary-color;
+    border-radius: 50%;
+    font-size: 1rem;
+    font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -577,20 +622,25 @@ p {
   }
 
   &__content {
-    flex: 1;
+    padding-left: 2rem;
   }
 
   &__title {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
   }
 
   &__description {
+    font-size: 0.95rem;
     color: $gray-color;
+    line-height: 1.5;
     margin-bottom: 0;
     text-align: center;
   }
 }
+
+
 
 // CTA section
 .cta-section {

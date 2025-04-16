@@ -12,12 +12,10 @@ import { CommonModule } from '@angular/common';
 export class ServicesComponent {
   services: any[] = [];
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
     this.dataService.getServices().subscribe(data => {
-      console.log(data);
-      
       this.services = data;
     });
   }

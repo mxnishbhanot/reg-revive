@@ -1,21 +1,45 @@
 [
-    {
-      "title": "Standard Clean",
-      "description": "Complete dust removal, component cleaning, and thermal paste replacement for optimal performance.",
-      "features": ["Dust Removal", "Component Cleaning", "Thermal Paste"],
-      "icon": "standard"
-    },
-    {
-      "title": "Urgent Clean",
-      "description": "Priority service with same-day pickup and next-day return for urgent cleaning needs.",
-      "features": ["Same-Day Pickup", "Next-Day Return", "Priority Service"],
-      "icon": "urgent",
-      "featured": true
-    },
-    {
-      "title": "Add-ons",
-      "description": "Enhance your cleaning with additional services like cable management and RGB setup.",
-      "features": ["Cable Management", "RGB Setup", "Performance Tuning"],
-      "icon": "addons"
-    }
-  ]
+  {
+    "title": "Basic Refresh",
+    "price": "399",
+    "description": "Essential care to keep your system clean and running smoothly with standard thermal paste.",
+    "features": [
+      "Exterior & Interior Dust Removal",
+      "Component Surface Cleaning",
+      "Standard Thermal Paste Application",
+      "Fan & Vent Cleaning",
+      "Visual Airflow Inspection",
+      "Pickup & Drop Included"
+    ],
+    "icon": "basic"
+  },
+  {
+    "title": "Deep Revive",
+    "price": "599",
+    "description": "A deeper clean with high-quality paste, component care, and thermal checks for performance users.",
+    "features": [
+      "Everything in Basic Refresh",
+      "High-Quality Thermal Paste",
+      "Deep Component Cleaning",
+      "Fan Blade & Heatsink Dust Removal",
+      "Post-Clean Thermal Checks",
+      "Priority Pickup & Drop"
+    ],
+    "icon": "standard",
+    "featured": true
+  },
+  {
+    "title": "Ultimate ProCare",
+    "price": "899",
+    "description": "Full professional treatment with cable management, BIOS upgrade, and performance optimization.",
+    "features": [
+      "Everything in Deep Revive",
+      "Cable Management",
+      "Performance Tuning (on request)",
+      "BIOS Update",
+      "Port Cleaning (USB/HDMI/LAN)",
+      "Monthly Health Reminder"
+    ],
+    "icon": "pro"
+  }
+]

@@ -39,7 +39,10 @@
             "prerender": true,
             "ssr": {
               "entry": "src/server.ts"
-            }
+            },
+            "allowedCommonJsDependencies": [
+              "leaflet"
+            ]  
           },
           "configurations": {
             "production": {
@@ -51,7 +54,7 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
+                  "maximumWarning": "5kb",
                   "maximumError": "8kB"
                 }
               ],

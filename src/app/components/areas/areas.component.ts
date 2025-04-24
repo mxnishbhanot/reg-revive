@@ -21,18 +21,27 @@ export class AreasComponent {
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      this.initMap();
+      import('leaflet').then((module) => {
+        const L = module.default || module; // Handles both ESM and CommonJS
+        this.initMap(L);
+      });
     }
   }
 
-  private async initMap(): Promise<void> {
-    const L = await import('leaflet');
-
+  private initMap(L: any): void {
     this.map = L.map('map').setView([30.7400, 76.7700], 10);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
+      attribution: '© OpenStreetMap contributors'
     }).addTo(this.map);
+
+    // Define the custom icon
+    const customIcon = L.icon({
+      iconUrl: '/assets/images/custom-marker.png', // Path to your custom PNG
+      iconSize: [38, 38], // Size of the icon [width, height]
+      iconAnchor: [19, 38], // Point of the icon that corresponds to the marker's location [x, y]
+      popupAnchor: [0, -38] // Point from which the popup should open relative to the iconAnchor [x, y]
+    });
 
     const locations = [
       { title: 'Rupnagar', lat: 30.9665, lng: 76.5272 },
@@ -41,8 +50,9 @@ export class AreasComponent {
       { title: 'Mohali', lat: 30.7046, lng: 76.7179 },
     ];
 
+    // Add markers with the custom icon
     locations.forEach(loc => {
-      L.marker([loc.lat, loc.lng])
+      L.marker([loc.lat, loc.lng], { icon: customIcon }) // Apply custom icon
         .addTo(this.map)
         .bindPopup(`<b>${loc.title}</b>`);
     });

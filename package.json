@@ -9,7 +9,7 @@
     "test": "ng test",
     "serve:ssr:rig-revive": "node dist/rig-revive/server/server.mjs",
     "build:ssr": "ng build && ng run rig-revive:server",
-  "serve:ssr": "node dist/rig-revive/server/main.js"
+    "serve:ssr": "node dist/rig-revive/server/main.js"
   },
   "private": true,
   "dependencies": {

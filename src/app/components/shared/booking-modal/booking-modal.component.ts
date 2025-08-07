@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -25,12 +25,12 @@ export class BookingModalComponent {
 
   submitBooking() {
     this.formSubmitted = true;
-    
+
     // Form validation would go here
-    if (this.bookingData.fullName && this.bookingData.email && 
+    if (this.bookingData.fullName && this.bookingData.email &&
         this.bookingData.phone && this.bookingData.serviceType) {
       console.log('Booking submitted:', this.bookingData);
-      
+
       // Reset form
       setTimeout(() => {
         this.formSubmitted = false;

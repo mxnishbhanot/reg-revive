@@ -16,9 +16,13 @@
   </div>
 
   <button
+    (click)="openModal(service)"
     class="btn"
     [class.btn--primary]="service.featured"
     [class.btn--outline]="!service.featured">
     Select Package
   </button>
 </div>
+
+<app-booking-modal [show]="isModalOpen" (close)="closeModal()">
+</app-booking-modal>

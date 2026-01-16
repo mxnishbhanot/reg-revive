@@ -1,0 +1,8 @@
+.btn--disabled,
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+  filter: grayscale(10%);
+  box-shadow: none;
+}

@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-booking-modal',
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './booking-modal.component.html',
   styleUrl: './booking-modal.component.scss'
 })
@@ -24,20 +24,41 @@ export class BookingModalComponent {
   formSubmitted = false;
 
   submitBooking() {
+    if (!this.validateModal()) {
+      return;
+    }
+
+    const serviceMap: any = {
+      basic: 'Basic Refresh',
+      standard: 'Deep Dive',
+      pro: 'Ultimate ProCare'
+    };
+
+    const message = `
+🚀 *New Rig Revive Lead*
+
+👤 Name: ${this.bookingData.fullName}
+📧 Email: ${this.bookingData.email}
+📞 Phone: ${this.bookingData.phone}
+🛠 Service: ${serviceMap[this.bookingData.serviceType]}
+`;
+
+    const encodedMessage = encodeURIComponent(message.trim());
+    const whatsappNumber = '917986495947';
+
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+    // Open WhatsApp
+    window.open(whatsappUrl, '_blank');
+
+    // Optional UX feedback
     this.formSubmitted = true;
 
-    // Form validation would go here
-    if (this.bookingData.fullName && this.bookingData.email &&
-        this.bookingData.phone && this.bookingData.serviceType) {
-      console.log('Booking submitted:', this.bookingData);
-
-      // Reset form
-      setTimeout(() => {
-        this.formSubmitted = false;
-        this.resetForm();
-        this.close.emit();
-      }, 1500);
-    }
+    setTimeout(() => {
+      this.formSubmitted = false;
+      this.resetForm();
+      this.close.emit();
+    }, 1000);
   }
 
   validateModal() {

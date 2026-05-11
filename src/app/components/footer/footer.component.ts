@@ -1,21 +1,28 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { LeadNotificationService } from '../../services/lead-notification.service';
 
 @Component({
   selector: 'app-footer',
-  imports: [FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './footer.component.html',
-  styleUrl: './footer.component.scss'
+  styleUrl: './footer.component.scss',
 })
 export class FooterComponent {
+  constructor(private readonly leadNotification: LeadNotificationService) {}
+
   formData = {
     name: '',
     email: '',
     phone: '',
-    service: ''
+    service: '',
   };
 
-  onSubmit() {
+  submitting = false;
+  feedback: { kind: 'success' | 'error'; text: string } | null = null;
+
+  async onSubmit() {
     if (
       !this.formData.name.trim() ||
       !this.formData.email.trim() ||
@@ -25,34 +32,41 @@ export class FooterComponent {
       return;
     }
 
-    const serviceMap: any = {
+    const serviceMap: Record<string, string> = {
       basic: 'Basic Refresh',
       standard: 'Deep Dive',
-      pro: 'Ultimate ProCare'
+      pro: 'Ultimate ProCare',
     };
 
     const message = `
-📩 *New Rig Revive Lead (Footer)*
+📩 New Rig Revive Lead (Footer)
 
-👤 Name: ${this.formData.name}
-📧 Email: ${this.formData.email}
-📞 Phone: ${this.formData.phone}
-🛠 Service: ${serviceMap[this.formData.service]}
-`;
+Name: ${this.formData.name}
+Email: ${this.formData.email}
+Phone: ${this.formData.phone}
+Service: ${serviceMap[this.formData.service] ?? this.formData.service}
+`.trim();
 
-    const encodedMessage = encodeURIComponent(message.trim());
-    const whatsappNumber = '917986495947'; // 👈 YOUR NUMBER
+    this.submitting = true;
+    this.feedback = null;
 
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+    const result = await this.leadNotification.submitLead(message, {
+      name: this.formData.name.trim(),
+      email: this.formData.email.trim(),
+    });
 
-    window.open(whatsappUrl, '_blank');
+    this.submitting = false;
 
-    // Reset form after opening WhatsApp
-    this.formData = {
-      name: '',
-      email: '',
-      phone: '',
-      service: ''
-    };
+    if (result.ok) {
+      this.feedback = { kind: 'success', text: 'Request sent! We will get back to you soon.' };
+      this.formData = {
+        name: '',
+        email: '',
+        phone: '',
+        service: '',
+      };
+    } else {
+      this.feedback = { kind: 'error', text: result.error ?? 'Something went wrong.' };
+    }
   }
 }

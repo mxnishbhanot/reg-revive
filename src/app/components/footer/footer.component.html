@@ -65,6 +65,10 @@
       <div class="footer__form">
         <h3 class="footer__heading">Book a Cleaning</h3>
         <form class="contact-form" (ngSubmit)="onSubmit()">
+          <p *ngIf="feedback" class="footer__feedback" [class.footer__feedback--error]="feedback.kind === 'error'"
+            [class.footer__feedback--success]="feedback.kind === 'success'" role="status">
+            {{ feedback.text }}
+          </p>
           <div class="form-group">
             <input type="text" placeholder="Your Name" [(ngModel)]="formData.name" name="name" required>
           </div>
@@ -83,17 +87,19 @@
             </select>
           </div>
           <button type="submit" class="btn btn--primary" [disabled]="
+    submitting ||
     !formData.name ||
     !formData.email ||
     !formData.phone ||
     !formData.service
   " [class.btn--disabled]="
+    submitting ||
     !formData.name ||
     !formData.email ||
     !formData.phone ||
     !formData.service
   ">
-            Submit Request
+            {{ submitting ? 'Sending…' : 'Submit Request' }}
           </button>
         </form>
       </div>

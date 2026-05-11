@@ -191,6 +191,16 @@ form {
   margin-left: 0.25rem;
 }
 
+.modal__submit-error {
+  color: $danger-color;
+  font-size: 0.875rem;
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background: rgba($danger-color, 0.08);
+  border: 1px solid rgba($danger-color, 0.25);
+}
+
 .btn {
   display: flex;
   align-items: center;

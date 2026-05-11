@@ -6,3 +6,23 @@ button:disabled {
   filter: grayscale(10%);
   box-shadow: none;
 }
+
+.footer__feedback {
+  font-size: 0.875rem;
+  margin: 0 0 1rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 6px;
+  line-height: 1.4;
+
+  &--success {
+    color: #065f46;
+    background: rgba(52, 211, 153, 0.15);
+    border: 1px solid rgba(52, 211, 153, 0.35);
+  }
+
+  &--error {
+    color: #991b1b;
+    background: rgba(248, 113, 113, 0.12);
+    border: 1px solid rgba(248, 113, 113, 0.35);
+  }
+}

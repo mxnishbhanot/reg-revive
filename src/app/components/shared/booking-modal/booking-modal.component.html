@@ -16,6 +16,7 @@
 
       <div class="modal__body" *ngIf="!formSubmitted">
         <form (ngSubmit)="submitBooking()" #form="ngForm" novalidate>
+          <p *ngIf="submitError" class="modal__submit-error" role="alert">{{ submitError }}</p>
           <div class="form-group">
             <label for="fullName">Full Name</label>
             <div class="input-wrapper">
@@ -158,8 +159,8 @@
             </div>
           </div> -->
 
-          <button type="submit" class="btn btn-primary" [disabled]="!validateModal()">
-            <span>Book Appointment</span>
+          <button type="submit" class="btn btn-primary" [disabled]="submitting || !validateModal()">
+            <span>{{ submitting ? 'Sending…' : 'Book Appointment' }}</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>
@@ -175,8 +176,8 @@
             <polyline points="22 4 12 14.01 9 11.01"></polyline>
           </svg>
         </div>
-        <h3>Booking Confirmed!</h3>
-        <p>Your service has been scheduled. You'll receive a confirmation email shortly.</p>
+        <h3>Request sent</h3>
+        <p>We received your booking details. We will contact you shortly.</p>
       </div>
     </div>
   </div>

@@ -1,14 +1,24 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { LeadNotificationService } from '../../../services/lead-notification.service';
 
 @Component({
   selector: 'app-booking-modal',
   imports: [CommonModule, FormsModule],
   templateUrl: './booking-modal.component.html',
-  styleUrl: './booking-modal.component.scss'
+  styleUrl: './booking-modal.component.scss',
 })
-export class BookingModalComponent {
+export class BookingModalComponent implements OnChanges {
+  constructor(private readonly leadNotification: LeadNotificationService) {}
+
   @Input() show = false;
   @Output() close = new EventEmitter<void>();
 
@@ -17,56 +27,67 @@ export class BookingModalComponent {
     email: '',
     phone: '',
     serviceType: '',
-    // date: '',
-    // time: ''
   };
 
   formSubmitted = false;
+  submitting = false;
+  submitError: string | null = null;
 
-  submitBooking() {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['show']?.currentValue === true) {
+      this.submitError = null;
+    }
+  }
+
+  async submitBooking() {
     if (!this.validateModal()) {
       return;
     }
 
-    const serviceMap: any = {
+    const serviceMap: Record<string, string> = {
       basic: 'Basic Refresh',
       standard: 'Deep Dive',
-      pro: 'Ultimate ProCare'
+      pro: 'Ultimate ProCare',
     };
 
     const message = `
-🚀 *New Rig Revive Lead*
+New Rig Revive Lead (booking)
 
-👤 Name: ${this.bookingData.fullName}
-📧 Email: ${this.bookingData.email}
-📞 Phone: ${this.bookingData.phone}
-🛠 Service: ${serviceMap[this.bookingData.serviceType]}
-`;
+Name: ${this.bookingData.fullName}
+Email: ${this.bookingData.email}
+Phone: ${this.bookingData.phone}
+Service: ${serviceMap[this.bookingData.serviceType] ?? this.bookingData.serviceType}
+`.trim();
 
-    const encodedMessage = encodeURIComponent(message.trim());
-    const whatsappNumber = '917986495947';
+    this.submitting = true;
+    this.submitError = null;
 
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+    const result = await this.leadNotification.submitLead(message, {
+      name: this.bookingData.fullName.trim(),
+      email: this.bookingData.email.trim(),
+    });
 
-    // Open WhatsApp
-    window.open(whatsappUrl, '_blank');
+    this.submitting = false;
 
-    // Optional UX feedback
-    this.formSubmitted = true;
-
-    setTimeout(() => {
-      this.formSubmitted = false;
-      this.resetForm();
-      this.close.emit();
-    }, 1000);
+    if (result.ok) {
+      this.formSubmitted = true;
+      setTimeout(() => {
+        this.formSubmitted = false;
+        this.resetForm();
+        this.close.emit();
+      }, 2000);
+    } else {
+      this.submitError = result.error ?? 'Something went wrong.';
+    }
   }
 
-  validateModal() {
-    if (this.bookingData.fullName.trim().length === 0 || this.bookingData.email.trim().length === 0 ||
-      this.bookingData.phone.trim().length === 0 || this.bookingData.serviceType.trim().length === 0) {
-      return false
-    }
-    return true;
+  validateModal(): boolean {
+    return (
+      this.bookingData.fullName.trim().length > 0 &&
+      this.bookingData.email.trim().length > 0 &&
+      this.bookingData.phone.trim().length > 0 &&
+      this.bookingData.serviceType.trim().length > 0
+    );
   }
 
   resetForm() {
@@ -75,8 +96,7 @@ export class BookingModalComponent {
       email: '',
       phone: '',
       serviceType: '',
-      // date: '',
-      // time: ''
     };
+    this.submitError = null;
   }
 }
